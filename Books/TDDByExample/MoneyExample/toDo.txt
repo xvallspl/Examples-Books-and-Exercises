@@ -3,3 +3,7 @@ $5 + 10 CHF = $10 if rate is 2:1
 Make "amount" private
 [X] Dollar side effects?
 Money rounding?
+[X] equals()
+hashCode()
+Equal null
+Equal object
