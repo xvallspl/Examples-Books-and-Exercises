@@ -1,12 +1,14 @@
 package Money;
 public class Dollar{
 	
-	public Dollar(int amount)
+	private int amount;
+	
+	Dollar(int amount)
 	{
 		this.amount=amount;
 	}
 
-	public Dollar times(int multiplier){
+	Dollar times(int multiplier){
 		return new Dollar(amount*multiplier);
 	}
 
@@ -14,6 +16,4 @@ public class Dollar{
 		Dollar dollar = (Dollar) object;
 		return amount == dollar.amount;
 	}
-	
-	private int amount;
 }
