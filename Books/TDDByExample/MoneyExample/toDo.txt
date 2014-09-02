@@ -9,5 +9,6 @@ Equal null
 Equal object
 [X] 5 CHF * 2 CHF = 10 CHF
 Dollar/Franc duplication
-Common equals
+[X]Common equals
 Common times
+[X]Compare Francs with Dollars
