@@ -1,4 +1,4 @@
-package Money;
+package money;
 
 public class Franc extends Money{
 	
@@ -8,6 +8,6 @@ public class Franc extends Money{
 	}
 
 	Money times(int multiplier){
-		return  Money.franc(amount*multiplier);
+		return  new Money(amount*multiplier,currency);
 	}
 }

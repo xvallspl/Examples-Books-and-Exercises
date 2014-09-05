@@ -1,12 +1,14 @@
-package Money;
+package money;
 
-abstract class Money {
+class Money {
 	
 	protected int amount;
 	
 	protected String currency;
 	
-	abstract Money times(int multiplier);
+	Money times(int multiplier){
+		return null;
+	}
 	
 	Money(int amount, String currency)
 	{
@@ -25,10 +27,14 @@ abstract class Money {
 	public boolean equals(Object object){
 		Money money = (Money) object;
 		return amount == money.amount
-				&& getClass().equals(money.getClass());
+				&& currency().equals(money.currency());
 	}
 
 	String currency() {
 		return currency;
+	}
+	
+	public String toString(){
+		return amount+""+currency;
 	}
 }
