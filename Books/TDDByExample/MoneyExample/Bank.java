@@ -6,8 +6,8 @@ public class Bank {
 		
 	}
 	
-	public Money reduce(Expression source, String string) {
-		return Money.dollar(10);
+	Money reduce(Expression source, String to) {
+		return source.reduce(to);
 	}
 	
 }
