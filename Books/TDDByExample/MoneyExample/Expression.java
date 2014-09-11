@@ -6,4 +6,7 @@ public interface Expression {
 
 	Expression plus(Expression tenFrancs);
 
+	Expression times(int multiplier);
+
+
 }
