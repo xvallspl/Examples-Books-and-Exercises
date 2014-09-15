@@ -1,0 +1,6 @@
+[X]Invoke test method
+Invoke setUp first
+Invoke tearDown afterward
+Invoke tearDown even if the test fails
+Run multiple tests
+Report collected results
