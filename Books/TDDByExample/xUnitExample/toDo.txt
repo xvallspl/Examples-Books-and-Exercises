@@ -3,5 +3,6 @@
 [X]Invoke tearDown afterward
 Invoke tearDown even if the test fails
 Run multiple tests
-Report collected results
+[X]Report collected results
 [X]Log string in WasRun
+Report failed tests
