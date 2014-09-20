@@ -2,8 +2,9 @@
 [X]Invoke setUp first
 [X]Invoke tearDown afterward
 Invoke tearDown even if the test fails
-Run multiple tests
+[X]Run multiple tests
 [X]Report collected results
 [X]Log string in WasRun
 [X]Report failed tests
 Catch and report setUp errors
+Create TestSuite from a TestCase class
