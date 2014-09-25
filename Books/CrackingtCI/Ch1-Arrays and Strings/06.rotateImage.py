@@ -9,7 +9,6 @@ def myRotateLeft(m, n):
 			m[i][j]  = m[j][-(i+1)]
 			m[j][-(i+1)] = m[-(i+1)][-(j+1)]
 			m[-(i+1)][-(j+1)] = m[i][-(j+1)]
-			m[-(j+1)][i] = m[-(j+1)][i]
 			m[-(j+1)][i] = aux
 
 def theirRotateRight(m, n):
@@ -34,3 +33,4 @@ if __name__ == '__main__':
 	print "myOutput:", M
 	theirRotateRight(M,4)
 	print "theirOutput: ", M
+	
