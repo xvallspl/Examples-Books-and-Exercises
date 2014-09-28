@@ -13,6 +13,22 @@ void myDeletePointedNode(struct node *p){
 	free(next_node);
 }
 
+int theirDeleteNode(struc node *n){
+	if( n == NULL || n->next == NULL){
+		return -1;
+	}
+
+	struct node *next;
+	
+	next = n->next;
+	n->x = next->x;
+	n->next = next->next;
+	
+	free(next_node);
+
+	return 1;
+}
+
 int main(){
 	struct node *first, *pointer;
 	
