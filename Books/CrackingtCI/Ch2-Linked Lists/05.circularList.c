@@ -18,7 +18,38 @@ struct node * myLoopFinder(struct node *head){
 			p2 = p2->next;
 		}
 	}
-	return head;
+	return NULL;
+}
+
+struct node * theirLoopFinder(struct node *head){
+	struct node *p1, *p2;
+	p1 = head;
+	p2 = head;
+
+	// Find meeting point
+	while(p2->next!=NULL){
+		p1 = p1->next;
+		p2 = p2->next->next;
+		if(p1==p2){
+			break;
+		}
+	}
+
+	// Error check - there is no meeting point, and therefore no loop
+	if(p2->next == NULL){
+		return NULL;
+	}
+
+	/* Move n1 to Head. Keep n2 at Meeting Point. Each are k steps 
+	* from the Loop Start. If they move at the same pace, they must
+	* meet at Loop Start. */ 
+	p1 = head;
+	while (p1 != p2) {
+		p1 = p1->next;
+		p2 = p2->next; 
+	}
+	// Now n2 points to the start of the loop.
+	return p2;
 }
 
 int main(){
@@ -37,6 +68,8 @@ int main(){
 	p1->next=p2;
 	printf("Starting loop at: %d\n", p2->x);
 	p1 = myLoopFinder(first);
-	printf("Retrieved loop at: %d\n", p1->x);
+	printf("I retrieve the start of the loop at: %d\n", p1->x);
+	p1 = theirLoopFinder(first);
+	printf("They retrieve the start of the loop at: %d\n", p1->x);
 	//deleteList(first);
 }
