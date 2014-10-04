@@ -47,7 +47,7 @@ void push(struct stack **s, int data){
 		(auxStack)->capacity=(*s)->capacity;
 		(auxStack)->nItems=0;
 		*s=auxStack;
-		(*s)->top == NULL;
+		(*s)->top = NULL;
 	}
 	if(!isEmpty(*s)){
 		aux->next = (*s)->top;
@@ -71,13 +71,38 @@ void pop(struct stack **s){
 	}
 }
 
+void popAt(struct stack **s, int nStack){
+	int i;
+	for(i=1; i<nStack; i++){
+		*s=(*s)->next;
+		if(*s == NULL){
+			return;
+		}
+	}
+	pop(&(*s));
+}
+
+void nItemsAtStack(struct stack *s, int nStack){
+	int i;
+	for(i=1; i<nStack; i++){
+		s=s->next;
+		if(s == NULL){
+			return;
+		}
+	}
+	printf("Items of the stack n.%d: %d\n", nStack, s->nItems);
+}
+
 int main(){
 	int i;
 	int j=3;
 	struct stack *setOfStacks;
+	struct stack *setOfStacksFirst;
+	setOfStacks = (struct stack *) malloc(sizeof(struct stack));
 	setOfStacks->capacity=5;
 	setOfStacks->nItems=0;
 	setOfStacks->top=NULL;
+	setOfStacksFirst=setOfStacks;
 
 	for(i=0; i<9;i++){
 		push(&setOfStacks, i);
@@ -91,7 +116,14 @@ int main(){
 	pop(&setOfStacks);
 	pop(&setOfStacks);
 	pop(&setOfStacks);
-	printf("Change of stack after bottom reached, S.top: %d, S.nItems: %d\n", setOfStacks->top->data, setOfStacks->nItems);
-
+	printf("Change of stack after bottom reached, S.top: %d, S.nItems: %d\n", 
+		setOfStacks->top->data, setOfStacks->nItems);
+	for(i=10; i<15;i++){
+		push(&setOfStacks, i);
+	}
+	nItemsAtStack(setOfStacksFirst, 1);
+	popAt(&setOfStacksFirst, 1);
+	nItemsAtStack(setOfStacksFirst, 1);
+	
 	return 0;
 }
