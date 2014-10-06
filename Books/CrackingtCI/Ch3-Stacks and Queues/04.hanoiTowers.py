@@ -14,13 +14,12 @@ class Stack:
 		self.items=[]
 
 	def pop(self):
-		if(self.items==[]):
+		if(self.items!=[]):
 			return self.items.pop()
-		else:
-			print "The stack is already empty\n"
+		return None
 
 	def push(self, n):
-		if(len(self.items)<capacity):
+		if(len(self.items)<self.capacity):
 			self.items.append(n)
 		else:
 			print "Stack overflow"
@@ -36,16 +35,16 @@ class HanoiGame:
 
 	def moveTower(self, N, source, destination, tmp):
 		if(N>0):
-			self.moveTower(n-1, source, tmp, destination)
+			self.moveTower(N-1, source, tmp, destination)
 			self.moveSingle(source, destination)
-			self.moveTower(n-1, tmp, destination, source)
+			self.moveTower(N-1, tmp, destination, source)
 
 	def moveSingle(self, source, destination):
 		piece=source.pop()
 		destination.push(piece)
 	
 	def run(self):
-		moveTower(len(self.firstTower), self.firstTower, self.thirdTower, self.secondTower)
+		self.moveTower(self.firstTower.capacity, self.firstTower, self.thirdTower, self.secondTower)
 	
 
 
