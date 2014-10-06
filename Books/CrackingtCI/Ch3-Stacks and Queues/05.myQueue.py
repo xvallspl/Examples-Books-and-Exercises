@@ -13,7 +13,7 @@ class Stack:
         return None
 
     def push(self, n):
-            self.items.append(n)
+        self.items.append(n)
 
     def peek(self):
         return self.items[-1]
@@ -41,3 +41,4 @@ class MyQueue:
     def peek(self):
         self.move(self.stackIn, self.stackOut)
         return self.stackOut.peek()
+        
