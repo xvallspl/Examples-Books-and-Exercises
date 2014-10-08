@@ -16,12 +16,13 @@ int isBalanced(struct node *tree){
 }
 
 void setTree(struct node **tree, int n){
-	if(n>=0){
-		(*tree)->data = n--;
+	if(n>=2){
+		(*tree)->data = n;
+		n--;
 		printf("%d\n", n);
 		(*tree)->right = (struct node *) malloc(sizeof(struct node));
 		(*tree)->left  = (struct node *) malloc(sizeof(struct node));
-		setTree( &(*tree)->right, n/2);
+		setTree(&(*tree)->right, n/2);
 		setTree(&(*tree)->left, n/2);
 	}
 }
