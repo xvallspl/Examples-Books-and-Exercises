@@ -11,27 +11,22 @@ struct node{
 
 
 int isBalanced(struct node *tree){
-	return (branchLength(tree)==-1)? 0 : 1; 
-}
-
-int branchLength(struct node *tree){
 	int a, b;
-	a = (tree->right!=NULL)? branchLength(tree) : 0;
-	b = (tree->left!=NULL) ? branchLength(tree) : 0;	
+	a = (tree->right != NULL) ? isBalanced(tree) : -1;
+	b = (tree->left  != NULL) ? isBalanced(tree) : -1;	
 	
-	if( a == -1 || b == -1){
-		return -1;
+	if(a == 0 || b == 0){
+		return 0;
 	}
 
-	if(a == 0 && b == 0){
+	if( a == -1 && b == -1){
 		return 1;
 	}
 
-	if( -1>(a-b) || (a-b)>1){
-		return -1;
-	}else{
-		return max(a,b);
-	}
+	a = (a == -1) ? a+1 : a;
+	a = (b == -1) ? b+1 : b;
+
+	return (abs(a-b)>1) ? 0 : max(a,b);
 }
 
 void setTree(struct node **tree, int n){
