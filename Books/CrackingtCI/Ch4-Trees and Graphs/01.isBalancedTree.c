@@ -10,10 +10,10 @@ struct node{
 };
 
 
-int isBalanced(struct node *tree){
+int myIsBalanced(struct node *tree){
 	int a, b, max;
-	a = (tree->right != NULL) ? isBalanced(tree->right) : -1;
-	b = (tree->left  != NULL) ? isBalanced(tree->left) : -1;	
+	a = (tree->right != NULL) ? myIsBalanced(tree->right) : -1;
+	b = (tree->left  != NULL) ? myIsBalanced(tree->left) : -1;	
 	
 	if(a == 0 || b == 0){
 		return 0;
@@ -28,6 +28,32 @@ int isBalanced(struct node *tree){
 	max=(a>b)?a:b;
 	return (abs(a-b)>1) ? 0 : max;
 }
+
+int maxDepth(struct node *tree){
+	int rightMaxLength, leftMaxLength;
+	if(tree==NULL){
+		return 0;
+	}
+	rightMaxLength = maxDepth(tree->right);
+	leftMaxLength  = maxDepth(tree->left);
+	return 1 + ((rightMaxLength > leftMaxLength) ? rightMaxLength : leftMaxLength);
+}
+
+int minDepth(struct node *tree){
+	int rightMinLength, leftMinLength;
+	if(tree==NULL){
+		return 0;
+	}
+	rightMinLength = minDepth(tree->right);
+	leftMinLength  = minDepth(tree->left);
+	return 1 + ((rightMinLength > leftMinLength) ? leftMinLength : rightMinLength);
+
+}
+
+int theirIsBalanced(struct node *root){
+	return (maxDepth(root) - minDepth(root)) <= 1;
+}
+
 
 void setBalancedTreeExample(struct node **tree, int n){
 	if(n>=2){
@@ -63,8 +89,8 @@ int main(){
 	tree1=tree1->right;
 	tree1->right=(struct node *) malloc(sizeof(struct node));
 	tree1->right->data=50;
-	printf("isBalanced applied to a non-balanced tree: %d\n", isBalanced(root1));
-	printf("isBalanced applied to a balanced tree: %d\n", isBalanced(root2));
-
-
+	printf("My isBalanced applied to a non-balanced tree: %d\n", myIsBalanced(root1));
+	printf("My isBalanced applied to a balanced tree: %d\n", myIsBalanced(root2));
+	printf("Book's isBalanced applied to a non-balanced tree: %d\n", theirIsBalanced(root1));
+	printf("Book's isBalanced applied to a balanced tree: %d\n", theirIsBalanced(root2));
 }
