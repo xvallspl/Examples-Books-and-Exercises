@@ -11,9 +11,9 @@ struct node{
 
 
 int isBalanced(struct node *tree){
-	int a, b;
-	a = (tree->right != NULL) ? isBalanced(tree) : -1;
-	b = (tree->left  != NULL) ? isBalanced(tree) : -1;	
+	int a, b, max;
+	a = (tree->right != NULL) ? isBalanced(tree->right) : -1;
+	b = (tree->left  != NULL) ? isBalanced(tree->left) : -1;	
 	
 	if(a == 0 || b == 0){
 		return 0;
@@ -25,20 +25,20 @@ int isBalanced(struct node *tree){
 
 	a = (a == -1) ? a+1 : a;
 	a = (b == -1) ? b+1 : b;
-
-	return (abs(a-b)>1) ? 0 : max(a,b);
+	max=(a>b)?a:b;
+	return (abs(a-b)>1) ? 0 : max;
 }
 
-void setTree(struct node **tree, int n){
+void setBalancedTreeExample(struct node **tree, int n){
 	if(n>=2){
 		(*tree)->data = n;
 		n--;
-		printf("%d\n", n);
 		(*tree)->right = (struct node *) malloc(sizeof(struct node));
 		(*tree)->left  = (struct node *) malloc(sizeof(struct node));
-		setTree(&(*tree)->right, n/2);
-		setTree(&(*tree)->left, n/2);
+		setBalancedTreeExample(&(*tree)->right, n/2);
+		setBalancedTreeExample(&(*tree)->left, n/2);
 	}else{
+		(*tree)->data = n;
 		(*tree)->right=NULL;
 		(*tree)->left=NULL;
 	}
@@ -55,6 +55,16 @@ int main(){
 	root2= tree2;
 	
 	n=11;
-	setTree(&tree1, n);
-	setTree(&tree2, n);
+	setBalancedTreeExample(&tree1, n);
+	setBalancedTreeExample(&tree2, n);
+	while(tree1->right!=NULL) tree1=tree1->right;
+	tree1->right=(struct node *) malloc(sizeof(struct node));
+	tree1->right->data=25;
+	tree1=tree1->right;
+	tree1->right=(struct node *) malloc(sizeof(struct node));
+	tree1->right->data=50;
+	printf("isBalanced applied to a non-balanced tree: %d\n", isBalanced(root1));
+	printf("isBalanced applied to a balanced tree: %d\n", isBalanced(root2));
+
+
 }
