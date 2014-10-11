@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include "list.c"
 
+/*Write code to remove duplicates from an unsorted linked list.
+FOLLOW UP
+How would you solve this problem if a temporary buffer is not allowed?*/
+
 void myRemoveRepeated(struct node* n){
 	struct node *runner, *first, *aux;
 	first=n;
