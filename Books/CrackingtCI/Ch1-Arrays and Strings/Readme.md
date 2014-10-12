@@ -8,3 +8,4 @@ Exercises from the book Cracking the Code Interview. Chapter I: Arrays and Strin
 3. Remove the duplicate characters in a string (C)
 6. A method to rotate the image by 90 degrees (Python)
 7. Set column and row to zero if any zero element on them (Python)
+8. Check if s2 is a rotation of s1 using only one call to isSubstring (Python)
