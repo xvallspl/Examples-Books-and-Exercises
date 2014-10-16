@@ -10,6 +10,38 @@ struct node{
   struct node *left;
 };
 
+struct nodeList{
+  int data;
+  struct nodeList *next;
+};
+
+struct listOfLists{
+  struct nodeList *head;
+  struct listOfLists *next;
+};
+
+void generateListPerLevel(struct node *treeNode, struct listOfLists **list){
+  struct nodeList *node;
+
+  if((*list) == NULL){
+    (*list) = (struct listOfLists *) malloc(sizeof(struct listOfLists));
+    (*list)->next = NULL;
+    (*list)->head = (struct nodeList *) malloc(sizeof(struct nodeList));
+    (*list)->head->data = node->data;
+    (*list)->head->next = NULL;
+  }else{
+    while(node->next!=NULL) node = node->next;
+
+    node->next = (struct nodeList *) malloc(sizeof(struct nodeList));
+    node = node->next;
+    node->data = treeNode->data;
+    node->next = NULL;
+
+    generateListPerLevel( treeNode->left, &(*list)->next);
+    generateListPerLevel( treeNode->right, &(*list)->next);
+  }
+}
+
 struct node *insertNode(struct node *node, int data) { 
   if (node == NULL) {
     node = (struct node *) malloc(sizeof(struct node));
@@ -32,7 +64,12 @@ int main(){
   int i;
   struct node *root;
   root = NULL;
+  struct listOfLists *listOfLevels;
+  listOfLevels = NULL;
 
-  for(i=0;i<10;i++)
-      insertNode(root, i);
+  for(i=0;i<10;i++) insertNode(root, i);
+
+  generateListPerLevel( root, &listOfLevels);
+
+  return 0;
 }
