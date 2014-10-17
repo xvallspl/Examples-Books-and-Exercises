@@ -20,16 +20,18 @@ struct listOfLists{
   struct listOfLists *next;
 };
 
-void generateListPerLevel(struct node *treeNode, struct listOfLists **list){
+struct listOfLists * generateListPerLevel(struct node *treeNode, struct listOfLists **list){
   struct nodeList *node;
-
   if((*list) == NULL){
     (*list) = (struct listOfLists *) malloc(sizeof(struct listOfLists));
     (*list)->next = NULL;
     (*list)->head = (struct nodeList *) malloc(sizeof(struct nodeList));
-    (*list)->head->data = node->data;
+    (*list)->head->data = treeNode->data;
     (*list)->head->next = NULL;
+    if(treeNode->left)  generateListPerLevel(treeNode->left, &(*list)->next);
+    if(treeNode->right) generateListPerLevel(treeNode->right, &((*list)->next));
   }else{
+    node = (*list)->head;
     while(node->next!=NULL) node = node->next;
 
     node->next = (struct nodeList *) malloc(sizeof(struct nodeList));
@@ -37,9 +39,10 @@ void generateListPerLevel(struct node *treeNode, struct listOfLists **list){
     node->data = treeNode->data;
     node->next = NULL;
 
-    generateListPerLevel( treeNode->left, &(*list)->next);
-    generateListPerLevel( treeNode->right, &(*list)->next);
+    if(treeNode->left)  generateListPerLevel(treeNode->left, &((*list)->next));
+    if(treeNode->right) generateListPerLevel(treeNode->right, &((*list)->next));
   }
+  return(*list);
 }
 
 struct node *insertNode(struct node *node, int data) { 
@@ -60,16 +63,38 @@ struct node *insertNode(struct node *node, int data) {
   return node;
 } 
 
+void printLists(struct listOfLists *listOfLevels){
+  struct nodeList *p;
+
+  while(listOfLevels!=NULL){
+    p = listOfLevels->head;
+    while(p!=NULL){
+      printf("%d ", p->data);
+      p = p->next;
+    }
+    printf("\n");
+    listOfLevels = listOfLevels->next;
+  }
+}
+
 int main(){
-  int i;
-  struct node *root;
+  int i, j;
+  struct node *root, *root2;
   root = NULL;
-  struct listOfLists *listOfLevels;
-  listOfLevels = NULL;
+  root2 = NULL;
+  struct listOfLists *listOfLevels1, *listOfLevels2;
+  listOfLevels1 = NULL;
+  listOfLevels2 = NULL;
 
-  for(i=0;i<10;i++) insertNode(root, i);
-
-  generateListPerLevel( root, &listOfLevels);
+  for(i=0;i<10;i++) root = insertNode(root, i);
+  listOfLevels1 = generateListPerLevel(root, &listOfLevels1);
+  
+  for(i=0;i<10;i++) root2 = insertNode(root2, rand()%10);
+  listOfLevels2 = generateListPerLevel(root2, &listOfLevels2);
+  
+  printLists(listOfLevels1);
+  printf("\n");
+  printLists(listOfLevels2);
 
   return 0;
 }
