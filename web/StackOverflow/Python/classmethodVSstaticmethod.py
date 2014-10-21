@@ -7,7 +7,7 @@ class Date:
     self.year  = year
 
   def display(self):
-    return "{0}-{1}-{2}".format(self.month, self.day, self.year)
+    print "{0}-{1}-{2}".format(self.month, self.day, self.year)
 
   @staticmethod
   def millenium(month, day):
@@ -17,18 +17,17 @@ class Date:
 
 class DateTime(Date):
   def display(self):
-      return "{0}-{1}-{2} - 00:00:00PM".format(self.month, self.day, self.year)
+      print "{0}-{1}-{2} - 00:00:00PM".format(self.month, self.day, self.year)
 
 
 
 class DateTime2(Date):
   def display(self):
-      return "{0}-{1}-{2} - 00:00:00PM".format(self.month, self.day, self.year)
+      print "{0}-{1}-{2} - 00:00:00PM".format(self.month, self.day, self.year)
 
   @classmethod
   def millenium(cls, month, day):
     return cls(month, day, 2000)
-
 
 
 new_year = Date(1, 1, 2013)               # Creates a new Date object
