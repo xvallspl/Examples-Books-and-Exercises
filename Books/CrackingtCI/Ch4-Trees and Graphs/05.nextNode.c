@@ -27,12 +27,40 @@ struct node *insertNode(struct node *node, int data, struct node *parent) {
   return node;
 } 
 
+struct node * theirLeftMostChild(struct node *node){
+	if(node==NULL) return NULL;
+	while(node->left != NULL) node = node->left;
+	return node;
+}
+
+struct node *theirSuccessor(struct node *node){
+	//in-order: left, N, right
+	if(node!=NULL){
+		struct node *parent, *succ;
+		parent = node->parent;
+		if(parent==NULL || node->right!=NULL){
+			succ = theirLeftMostChild(node->right);
+		}else{
+			while(parent!=NULL){
+				if(parent->left==node) break;
+				node = parent;
+				parent = parent-> parent;
+			}
+			succ = parent;
+		}
+		return succ;
+	}
+	return NULL;
+}
+
+
 int main(){
   int i;
-  struct node *root;
+  struct node *root, *succ, *n;
   root = NULL;
 
-  for(i=0;i<10;i++) root = insertNode(root, i, NULL);
-
+  for(i=0;i<10;i++) root = insertNode(root, rand()%10, NULL);
+  n=root->left->right; //just to try, may not always work 
+  succ = theirSuccessor(n);
   return 0;
 }
