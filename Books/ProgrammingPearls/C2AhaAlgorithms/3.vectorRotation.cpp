@@ -49,7 +49,6 @@ int main(){
 	printArray(v, n);
 	//usingExtraArray(v, n, i);
 	juggling(v,n,i);
-	// jugglerot(v, i, n);
 	printArray(v, n);
 	return 0;
 }
